@@ -329,18 +329,18 @@ static const void* initInterTab2D( int method, bool fixpt )
     return fixpt ? (const void*)itab : (const void*)tab;
 }
 
-#ifndef __MINGW32__
-static bool initAllInterTab2D()
-{
-    return  initInterTab2D( INTER_LINEAR, false ) &&
-            initInterTab2D( INTER_LINEAR, true ) &&
-            initInterTab2D( INTER_CUBIC, false ) &&
-            initInterTab2D( INTER_CUBIC, true ) &&
-            initInterTab2D( INTER_LANCZOS4, false ) &&
-            initInterTab2D( INTER_LANCZOS4, true );
-}
+#if !defined(__MINGW32__) || defined(ESP32)
+// static bool initAllInterTab2D()
+// {
+//     return  initInterTab2D( INTER_LINEAR, false ) &&
+//             initInterTab2D( INTER_LINEAR, true ) &&
+//             initInterTab2D( INTER_CUBIC, false ) &&
+//             initInterTab2D( INTER_CUBIC, true ) &&
+//             initInterTab2D( INTER_LANCZOS4, false ) &&
+//             initInterTab2D( INTER_LANCZOS4, true );
+// }
 
-static volatile bool doInitAllInterTab2D = initAllInterTab2D();
+// static volatile bool doInitAllInterTab2D = initAllInterTab2D();
 #endif
 
 template<typename ST, typename DT> struct Cast

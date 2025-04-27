@@ -289,7 +289,7 @@ jas_image_t *jp2_decode(jas_stream_t *in, char *optstr)
         jas_image_setclrspc(dec->image, jp2_getcs(&dec->colr->data.colr));
         break;
     case JP2_COLR_ICC:
-        iccprof = jas_iccprof_createfrombuf(dec->colr->data.colr.iccp,
+        iccprof = jas_iccprof_createfrombuf((unsigned char *)dec->colr->data.colr.iccp,
           dec->colr->data.colr.iccplen);
         assert(iccprof);
         jas_iccprof_gethdr(iccprof, &icchdr);
