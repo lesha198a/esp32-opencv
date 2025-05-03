@@ -28,14 +28,12 @@ public:
     CV_ALWAYS_INLINE fixedpoint64(const int16_t& _val) { val = ((int64_t)_val) << fixedShift; }
     CV_ALWAYS_INLINE fixedpoint64(const uint16_t& _val) { val = ((int64_t)_val) << fixedShift; }
     CV_ALWAYS_INLINE fixedpoint64(const int32_t& _val) { val = ((int64_t)_val) << fixedShift; }
-    CV_ALWAYS_INLINE fixedpoint64(const int& _val) { val = ((int64_t)_val) << fixedShift; }
     CV_ALWAYS_INLINE fixedpoint64(const cv::softdouble& _val) { val = cvRound64(_val * cv::softdouble((int64_t)(1LL << fixedShift))); }
     CV_ALWAYS_INLINE fixedpoint64& operator = (const int8_t& _val) { val = ((int64_t)_val) << fixedShift; return *this; }
     CV_ALWAYS_INLINE fixedpoint64& operator = (const uint8_t& _val) { val = ((int64_t)_val) << fixedShift; return *this; }
     CV_ALWAYS_INLINE fixedpoint64& operator = (const int16_t& _val) { val = ((int64_t)_val) << fixedShift; return *this; }
     CV_ALWAYS_INLINE fixedpoint64& operator = (const uint16_t& _val) { val = ((int64_t)_val) << fixedShift; return *this; }
     CV_ALWAYS_INLINE fixedpoint64& operator = (const int32_t& _val) { val = ((int64_t)_val) << fixedShift; return *this; }
-    CV_ALWAYS_INLINE fixedpoint64& operator = (const int& _val) { val = ((int64_t)_val) << fixedShift; return *this; }
     CV_ALWAYS_INLINE fixedpoint64& operator = (const cv::softdouble& _val) { val = cvRound64(_val * cv::softdouble((int64_t)(1LL << fixedShift))); return *this; }
     CV_ALWAYS_INLINE fixedpoint64& operator = (const fixedpoint64& _val) { val = _val.val; return *this; }
     CV_ALWAYS_INLINE fixedpoint64 operator * (const int8_t& val2) const { return operator *(fixedpoint64(val2)); }
@@ -43,7 +41,6 @@ public:
     CV_ALWAYS_INLINE fixedpoint64 operator * (const int16_t& val2) const { return operator *(fixedpoint64(val2)); }
     CV_ALWAYS_INLINE fixedpoint64 operator * (const uint16_t& val2) const { return operator *(fixedpoint64(val2)); }
     CV_ALWAYS_INLINE fixedpoint64 operator * (const int32_t& val2) const { return operator *(fixedpoint64(val2)); }
-    CV_ALWAYS_INLINE fixedpoint64 operator * (const int& val2) const { return operator *(fixedpoint64(val2)); }
     CV_ALWAYS_INLINE fixedpoint64 operator * (const fixedpoint64& val2) const
     {
         bool sign_val = val < 0;
@@ -91,7 +88,6 @@ public:
     CV_ALWAYS_INLINE operator uint16_t() const { return saturate_cast<uint16_t>(); }
     CV_ALWAYS_INLINE operator int16_t() const { return saturate_cast<int16_t>(); }
     CV_ALWAYS_INLINE operator int32_t() const { return saturate_cast<int32_t>(); }
-    CV_ALWAYS_INLINE operator int() const { return saturate_cast<int>(); }
     CV_ALWAYS_INLINE bool isZero() { return val == 0; }
     static CV_ALWAYS_INLINE fixedpoint64 zero() { return fixedpoint64(); }
     static CV_ALWAYS_INLINE fixedpoint64 one() { return fixedpoint64((int64_t)(1LL << fixedShift)); }
@@ -214,7 +210,7 @@ public:
     CV_ALWAYS_INLINE operator int32_t() const { return saturate_cast<int32_t>(); }
     CV_ALWAYS_INLINE bool isZero() { return val == 0; }
     static CV_ALWAYS_INLINE fixedpoint32 zero() { return fixedpoint32(); }
-    static CV_ALWAYS_INLINE fixedpoint32 one() { return fixedpoint32(int32_t(1 << fixedShift)); }
+    static CV_ALWAYS_INLINE fixedpoint32 one() { return fixedpoint32((1 << fixedShift)); }
     friend class fixedpoint16;
 };
 
@@ -264,7 +260,7 @@ public:
     CV_ALWAYS_INLINE operator int32_t() const { return saturate_cast<int32_t>(); }
     CV_ALWAYS_INLINE bool isZero() { return val == 0; }
     static CV_ALWAYS_INLINE ufixedpoint32 zero() { return ufixedpoint32(); }
-    static CV_ALWAYS_INLINE ufixedpoint32 one() { return ufixedpoint32(uint32_t(1U << fixedShift)); }
+    static CV_ALWAYS_INLINE ufixedpoint32 one() { return ufixedpoint32((1U << fixedShift)); }
     friend class ufixedpoint16;
 };
 
