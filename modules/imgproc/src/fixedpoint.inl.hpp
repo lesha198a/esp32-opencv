@@ -210,7 +210,7 @@ public:
     CV_ALWAYS_INLINE operator int32_t() const { return saturate_cast<int32_t>(); }
     CV_ALWAYS_INLINE bool isZero() { return val == 0; }
     static CV_ALWAYS_INLINE fixedpoint32 zero() { return fixedpoint32(); }
-    static CV_ALWAYS_INLINE fixedpoint32 one() { return fixedpoint32((1 << fixedShift)); }
+    static CV_ALWAYS_INLINE fixedpoint32 one() { return fixedpoint32(int32_t(1 << fixedShift)); }
     friend class fixedpoint16;
 };
 
@@ -260,7 +260,7 @@ public:
     CV_ALWAYS_INLINE operator int32_t() const { return saturate_cast<int32_t>(); }
     CV_ALWAYS_INLINE bool isZero() { return val == 0; }
     static CV_ALWAYS_INLINE ufixedpoint32 zero() { return ufixedpoint32(); }
-    static CV_ALWAYS_INLINE ufixedpoint32 one() { return ufixedpoint32((1U << fixedShift)); }
+    static CV_ALWAYS_INLINE ufixedpoint32 one() { return ufixedpoint32(uint32_t(1U << fixedShift)); }
     friend class ufixedpoint16;
 };
 
